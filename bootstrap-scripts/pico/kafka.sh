@@ -39,9 +39,8 @@ EOF
 
 cat >> /etc/salt/grains <<EOF
 vlans:
-  internal: eth0
-  producer: eth1
-  interfaces: eth0
+  pnda: eth0
+  ingest: eth1
 EOF
 
 DISTRO=$(cat /etc/*-release|grep ^ID\=|awk -F\= {'print $2'}|sed s/\"//g)
@@ -51,8 +50,6 @@ cat > /etc/network/interfaces.d/eth1.cfg <<EOF
 auto eth1
 iface eth1 inet dhcp
 EOF
-
-ifup eth1
 
 elif [ "x$DISTRO" == "xrhel" ]; then
 
@@ -67,6 +64,8 @@ IPV6INIT="no"
 EOF
 
 fi
+
+ifup eth1
 
 echo $PNDA_CLUSTER-kafka-$1 > /etc/hostname
 hostname $PNDA_CLUSTER-kafka-$1

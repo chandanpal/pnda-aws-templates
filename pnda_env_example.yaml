@@ -125,3 +125,7 @@ elk-cluster:
 
   # number of logstash nodes
   LOGSTASH_NODES: 0
+
+mine_functions:
+  MINE_FUNCTIONS_NETWORK_IP_ADDRS_NIC: eth0
+  
